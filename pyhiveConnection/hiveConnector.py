@@ -5,8 +5,8 @@ import random
 #for LUDP Connection
 def LUDPConnect(username, passwd):
     # for LUDP test environment
-    zkhost="node15.test:2181,node16.test:2181"
-    znodeName="/hiveserver2"
+    zkhost="node81.it.leap.com:2181,node82.it.leap.com:2181"
+    znodeName="/ludp_hive_ha"
     serviceKeyword="serverUri"
     return connection(zkhost, znodeName, serviceKeyword, username, passwd)
 
