@@ -3,15 +3,15 @@ from pyhive import hive
 import random
 
 #for LUDP Connection
-def LUDPConnect(username, passwd):
+def LUDPConnect(username, passwd, database):
     # for LUDP test environment
     zkhost="node81.it.leap.com:2181,node82.it.leap.com:2181"
     znodeName="/ludp_hive_ha"
     serviceKeyword="serverUri"
-    return connection(zkhost, znodeName, serviceKeyword, username, passwd)
+    return connection(zkhost, znodeName, serviceKeyword, username, passwd, database)
 
 #connect hive by pyhive and return cursor
-def connection(zkhost, znodeName, serviceKeyword,username,passwd):
+def connection(zkhost, znodeName, serviceKeyword, username, passwd, database):
     hostList = discoveryThriftSerivcehost(zkhost, znodeName, serviceKeyword)
     hostLength = hostList.__len__()
     random.seed()
@@ -20,7 +20,7 @@ def connection(zkhost, znodeName, serviceKeyword,username,passwd):
         index = random.randint(0, hostLength-1)
         hostStr = hostList.pop(index).split(":")
         try:
-            cursor = hive.connect(host=hostStr[0], port=hostStr[1], username=username, password=passwd).cursor()
+            cursor = hive.connect(host=hostStr[0], port=hostStr[1], username=username, password=passwd, auth='LDAP', database=database).cursor()
             isConnected = True
         except:
             isConnected = False
