@@ -7,7 +7,7 @@ kazoo
 # example
 ```python
 from pyhiveConnection import hiveConnector
-cursor = hiveConnector.connection("node15.test:2181,node16.test:2181","/hiveserver2","serverUri","admin",None)
+cursor = hiveConnector.connection("node15.test:2181,node16.test:2181","/hiveserver2","serverUri","admin",None,databasename)
 cursor.execute("show databases")
 print( curosr.fetchall() )
 ```
